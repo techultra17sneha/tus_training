@@ -11,7 +11,6 @@ class school_management(models.Model):
 
     name = fields.Char()
     value = fields.Integer()
-    # value2 = fields.Float(compute="_value_pc", store=True)
     description = fields.Text()
     created_on = fields.Date(string="Created On")
     is_class_full = fields.Boolean(string="Class")
@@ -24,10 +23,6 @@ class school_management(models.Model):
                               string='State', default='new')
     employee_id = fields.Many2one('hr.employee', string="Teacher")
     subject_id = fields.Many2one('school.subject')
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         self.value2 = float(self.value) / 100
 
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'Value cannot be duplicate in records. Please assign another value.')
