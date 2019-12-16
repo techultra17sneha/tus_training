@@ -1,0 +1,45 @@
+<odoo>
+    <record id="view_wizard_example" model="ir.ui.view">
+			<field name="name">wizard.example.form</field>
+			<field name="model">wizard.example</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="name"/>
+						<field name="rank"/>
+						<field name="emp_type"/>
+						<field name="emp_id" attrs="{'invisible':[('emp_type','=','all')],'required':[('emp_type','=','individual')]}"/>
+					</group>
+					<footer>
+						<button name="change_rank" string="Change Rank" type="object" class="oe_highlight"/>
+						<button name="print_report" string="Print PDF" type="object" class="oe_highlight"/>
+						or
+						<button special="cancel" string="Cancel" class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+        <record id="action_change_rank" model="ir.actions.act_window">
+			<field name="name">Change Rank</field>
+			<field name="res_model">wizard.example</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+			<field name="view_id" ref="view_wizard_example"/>
+		</record>
+
+        <menuitem id="menu_change_color" action="action_change_rank" parent="school_management.menu_1"/>
+
+
+			<act_window id="act_wizard_example"
+					name="Update Rank"
+					res_model="wizard.example"
+					src_model="school_management.school_structure"
+					view_type="form"
+					view_mode="form"
+					view_id="view_wizard_example"
+					key2="client_action_multi"
+					target="new"/>
+
+</odoo>

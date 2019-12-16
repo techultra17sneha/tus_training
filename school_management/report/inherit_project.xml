@@ -1,0 +1,60 @@
+<odoo>
+<!--    <template id="inherit_existing_report_of_sale" inherit_id="sale.report_saleorder_document">-->
+<!--        <table class="table table-sm o_main_table" position="inside">-->
+<!--            <tr>-->
+<!--                <td><span>Snehaaaaaaaaaaa</span></td>-->
+<!--            </tr>-->
+<!--        </table>-->
+
+
+<!--    </template>-->
+<!--    <template id="report_saleorder">-->
+<!--    <t t-call="web.html_container">-->
+<!--        <t t-foreach="docs" t-as="doc">-->
+<!--            <t t-call="inherit_existing_report_of_sale" t-lang="doc.partner_id.lang"/>-->
+<!--        </t>-->
+<!--    </t>-->
+<!--        </template>-->
+
+
+    <template id="demo_inherit_new">
+		<t t-call="web.html_container">
+			<t t-call="web.external_layout">
+                <br/>
+                <br/>
+                <br/>
+<!--				<t t-foreach="docs" t-as="o">-->
+					<div class="page">
+						<div class="row">
+                            <table>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Project</td>
+                                </tr>
+                            </table>
+<!--                     <span t-esc="o.get_details()"></span>-->
+<!--                        <t t-foreach ="docs" t-as="emp">-->
+<!--                            <t t-foreach ="emp.get_value()" t-as="t">-->
+<!--                                <span t-esc="t"></span>-->
+
+<!--                            </t>-->
+<!--                        <p>testttttttttttttttt</p>-->
+<!--                        </t>-->
+                    </div>
+                    </div>
+<!--                </t>-->
+            </t>
+        </t>
+    </template>
+
+<!--        <report-->
+<!--            id="sale.action_report_saleorder"-->
+<!--            string="Quotation / Order"-->
+<!--            model="sale.order"-->
+<!--            report_type="qweb-pdf"-->
+<!--            file="school_management.demo_inherit_new"-->
+<!--            name="school_management.demo_inherit_new"-->
+<!--        />-->
+
+
+</odoo>

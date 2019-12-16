@@ -1,0 +1,255 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="school_management.list">
+            <field name="name">school_management list</field>
+            <field name="model">school_management.school_structure</field>
+            <field name="arch" type="xml">
+                <tree string="Testing" edit="false" delete="false" decoration-primary="is_boolean_ticked == True" decoration-danger="value == 12">
+                    <field name="name"/>
+                    <field name="value"/>
+                    <field name="created_on"/>
+                    <field name="is_class_full"/>
+                    <field name="last_admission"/>
+                    <field name="overall_rank"/>
+                    <field name="standard"/>
+                    <field name="is_boolean_ticked" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="school_management.form">
+            <field name="name">school_management form</field>
+            <field name="model">school_management.school_structure</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button type="object" name="action_change_color" string="Change Color" attrs="{'invisible': ['|',('value', '=', 12), '&amp;',('is_boolean_ticked', '=', True),('is_class_full', '=', True)]}"/>
+                        <button string="Change Rank" type="action" name="%(school_management.action_change_rank)d"/>
+                        <field name="states" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <h2>
+                            <label for="name" string="Name of record"/>
+                            <field name="name"/>
+                        </h2>
+                        <group>
+                            <group>
+                                <field name="employee_id" class="oe_no_button"/>
+                                <field name="subject_id" class="oe_no_button"/>
+                                <field name="value"/>
+                                <field name="last_admission"/>
+                                <field name="class_image"/>
+                            </group>
+                            <group>
+                                <field name="created_on"/>
+                                <field name="is_class_full"/>
+                                <field name="overall_rank"/>
+                                <field name="standard"/>
+                                <field name="is_boolean_ticked" invisible="0"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Graph View -->
+        <record id="view_school_management_graph" model="ir.ui.view">
+            <field name="name">view.emp.analysis.graph</field>
+            <field name="model">school_management.school_structure</field>
+            <field name="arch" type="xml">
+                <graph>
+                    <field name="employee_id" type="col"/>
+                    <field name="created_on" type="row"/>
+                    <field name="value" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_school_management_pivot" model="ir.ui.view">
+            <field name="name">view.emp.pivot</field>
+            <field name="model">school_management.school_structure</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="employee_id" type="row"/>
+                    <field name="created_on" type="col"/>
+                    <field name="value" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_school_management_kanban" model="ir.ui.view">
+            <field name="name">view.school_management.kanban</field>
+            <field name="model">school_management.school_structure</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="states" default_order="created_on" quick_create="true">
+                    <field name="id"/>
+                    <field name="states"/>
+                    <field name="created_on"/>
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="subject_id"/>
+                    <field name="value"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('hr.employee', 'image', record.employee_id.raw_value)}); height:60px; width: 60px;" role="img"/>
+                                    </td>
+                                    <td>
+                                        <a type="edit">
+                                            <field name="name"/>
+                                        </a>
+                                        <br/>
+<!--                                        <a t-att-href="'mailto:'+record.email.raw_value">-->
+<!--                                            <field name="email"/>-->
+<!--                                        </a>-->
+<!--                                        <a target="new" t-att-href="record.url.raw_value">-->
+<!--                                            <field name="url"/>-->
+<!--                                        </a>-->
+                                        <br/>
+                                        <field name="subject_id"/>
+                                        <br/>
+                                        <field name="value"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="school_management.action_window">
+            <field name="name">school_management window</field>
+            <field name="res_model">school_management.school_structure</field>
+            <field name="view_mode">kanban,tree,form,pivot,graph</field>
+        </record>
+
+        <!-- Employee -->
+        <record model="ir.actions.act_window" id="school_management.action_window_hr_employee">
+            <field name="name">HR Employee</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_teacher', '=', True)]</field>
+        </record>
+
+        <!-- school.subject -->
+        <record model="ir.actions.act_window" id="school_management.action_window_school_subject">
+            <field name="name">Subjects</field>
+            <field name="res_model">school.subject</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <!-- school.student -->
+        <record model="ir.actions.act_window" id="school_management.action_window_school_student">
+            <field name="name">Students</field>
+            <field name="res_model">school.student</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <!-- school.sport -->
+        <record model="ir.actions.act_window" id="school_management.action_window_school_sports">
+            <field name="name">Sportss</field>
+            <field name="res_model">school.sport</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <!-- server action to the one above -->
+        <!--
+        <record model="ir.actions.server" id="school_management.action_server">
+          <field name="name">school_management server</field>
+          <field name="model_id" ref="model_school_management_school_management"/>
+          <field name="state">code</field>
+          <field name="code">
+            action = {
+              "type": "ir.actions.act_window",
+              "view_mode": "tree,form",
+              "res_model": self._name,
+            }
+          </field>
+        </record>
+        -->
+
+        <!-- Top menu item -->
+        <menuitem name="school_management" id="school_management.menu_root"/>
+        <!-- menu categories -->
+        <menuitem name="Menu 1" id="school_management.menu_1" parent="school_management.menu_root"/>
+        <menuitem name="Menu 2" id="school_management.menu_2" parent="school_management.menu_root"/>
+        <!-- actions -->
+        <menuitem name="List" id="school_management.menu_1_list" parent="school_management.menu_1" action="school_management.action_window"/>
+
+        <menuitem name="Teachers" id="school_management.menu_1_teacher" parent="school_management.menu_2" action="school_management.action_window_hr_employee"/>
+
+        <menuitem name="Subjects" id="school_management.menu_1_school_subject" parent="school_management.menu_2" action="school_management.action_window_school_subject"/>
+
+        <menuitem name="Students" id="school_management.menu_1_school_student" parent="school_management.menu_1" action="school_management.action_window_school_student"/>
+
+        <menuitem name="Sports" id="school_management.menu_1_school_sport" parent="school_management.menu_2" action="school_management.action_window_school_sports"/>
+        <!--
+          <menuitem name="Server to list" id="school_management" parent="school_management.menu_2"
+                    action="school_management.action_server"/>
+          -->
+
+
+    <!--        Inherit -->
+        <record model="ir.ui.view" id="school_management.school_compose_list">
+            <field name="name">school.compose.inherit list</field>
+            <field name="model">school.compose.inherit</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="school_management.school_compose_inherit_form">
+            <field name="name">school.compose.inherit form</field>
+            <field name="model">school.compose.inherit</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="school_management.action_window_compose_inherit">
+            <field name="name">school.compose.inherit window</field>
+            <field name="res_model">school.compose.inherit</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Compose" id="school_management.menu_1_school_compose" parent="school_management.menu_2" action="school_management.action_window_compose_inherit"/>
+
+        <record model="ir.ui.view" id="sale_inherit">
+            <field name="name">sale_inherit_view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="payment_term_id" position="after">
+                    <field name="code"/>
+                </field>
+                <field name="payment_term_id" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

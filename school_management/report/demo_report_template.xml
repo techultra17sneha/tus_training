@@ -1,0 +1,172 @@
+
+
+
+<odoo>
+
+    <template id="demo_report_temp">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&amp;display=swap" rel="stylesheet"/>
+                    <link rel="stylesheet" href="school_management/static/src/css/vc.css" />
+                    <!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>-->
+                    <!--<style>
+
+
+
+
+                    </style>-->
+                    <div class="page">
+                            <div class="oe_structure"/>
+                        <h2><span t-field="o.name"/></h2>
+                        <div class="col-12">
+                            <div class="col-06">
+                                <table width="50%" class=" table table-dark w3-teal">
+                                        <tr>
+                                            <td>
+                                                Name
+                                            </td>
+                                            <td>
+                                                Rank
+                                            </td>
+                                        </tr>
+                                    </table>
+                            </div>
+                            <div class="col-06">
+                                <table class=" table table-dark">
+                                    <tr>
+                                        <td>
+                                            Name
+                                        </td>
+                                        <td>
+                                            Rank
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div>
+                            <table class="table table-bordered table-dark">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="2">
+
+            <table class=" table table-dark">
+                                    <tr>
+                                        <td>
+                                            Name
+                                        </td>
+                                        <td>
+                                            Rank
+                                        </td>
+                                    </tr>
+                                </table>
+
+        </td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <!--<td>Mary</td>-->
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+       <!-- <td>July</td>-->
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+
+    </template>
+
+
+
+<!--    <template id="demo_report_temp">-->
+<!--        <t t-call="web.html_container">-->
+<!--          <t t-foreach="docs" t-as="o">-->
+<!--            <t t-call="web.external_layout">-->
+<!--              <div class="page">-->
+<!--                <div class="oe_structure" />-->
+<!--                  <br />-->
+<!--                  <br />-->
+<!--                  <h2><span t-esc="o.name"/></h2>-->
+<!--                  <br />-->
+<!--                  <table width="100%" class="table table-bordered" style="border-color:red;">-->
+<!--                      <thead>-->
+<!--                          <tr>-->
+<!--                              <td width="5%" style="font-family: 'Helvetica';font-size: 18px;" align="center">-->
+<!--                                  <b>Teacher</b>-->
+<!--                              </td>-->
+<!--                              <td width="5%" style="font-family: 'Helvetica';font-size: 18px;" align="center">-->
+<!--                                  <b>Subject</b>-->
+<!--                              </td>-->
+<!--                              <td width="50%" align="center" style="font-family: 'Helvetica';font-size: 18px;">-->
+<!--                                  <b>Standard</b>-->
+<!--                              </td>-->
+<!--                              <td align="center" width="45%" style="font-family: 'Helvetica';font-size: 18px;">-->
+<!--                                  <b>Overall Rank</b>-->
+<!--                              </td>-->
+<!--                              <td align="center" width="45%" style="font-family: 'Helvetica';font-size: 18px;">-->
+<!--                                  <b>Last Admission</b>-->
+<!--                              </td>-->
+<!--                          </tr>-->
+<!--                      </thead>-->
+<!--                      <tbody>-->
+
+<!--&lt;!&ndash;                          <t t-foreach="o.invoice_line_ids" t-as="l">&ndash;&gt;-->
+<!--                              <tr>-->
+<!--&lt;!&ndash;                                  <td width="20%" style="font-family: 'Helvetica';font-size: 18px;" align="center">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <span t-field="l.number_container.unique_number"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  <td width="50%" align="center" style="font-family: 'Helvetica';font-size: 18px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                      <span t-field="l.type.type"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  <td width="50%" align="center" style="font-family: 'Helvetica';font-size: 18px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                      <span t-field="l.delivery_partner_id.name"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  <td align="center" width="20%" style="font-family: 'Helvetica';font-size: 18px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                      <span t-esc="l.pricelist_id.name"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  <td align="center" width="45%" style="font-family: 'Helvetica';font-size: 18px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                      <span t-esc="l.price_subtotal"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                  </td>&ndash;&gt;-->
+<!--                              </tr>-->
+<!--&lt;!&ndash;                          </t>&ndash;&gt;-->
+<!--                      </tbody>-->
+<!--                  </table>-->
+<!--                  <br/><br/>-->
+<!--                </div>-->
+<!--            </t>-->
+<!--          </t>-->
+<!--        </t>-->
+<!--    </template>-->
+
+
+
+
+    <report id="demo_qweb_report"
+            string="School Report"
+            model="school_management.school_structure"
+            report_type = "qweb-pdf"
+            file="school_management.demo_report_temp"
+            name="school_management.demo_report_temp"
+             />
+
+
+</odoo>

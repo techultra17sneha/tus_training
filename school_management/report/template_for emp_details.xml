@@ -1,0 +1,36 @@
+<odoo>
+
+    <template id="demo_report_info">
+		<t t-call="web.html_container">
+			<t t-call="web.external_layout">
+                <br/>
+                <br/>
+                <br/>
+				<t t-foreach="docs" t-as="o">
+					<div class="page">
+						<div class="row">
+                     <span t-esc="o.get_details()"></span>
+<!--                        <t t-foreach ="docs" t-as="emp">-->
+<!--                            <t t-foreach ="emp.get_value()" t-as="t">-->
+<!--                                <span t-esc="t"></span>-->
+
+<!--                            </t>-->
+<!--                        <p>testttttttttttttttt</p>-->
+<!--                        </t>-->
+                    </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <report id="demo_report_parser"
+            string="Employee Report"
+            model="hr.employee"
+            report_type = "qweb-pdf"
+            file="school_management.demo_report_info"
+            name="school_management.demo_report_info"
+             />
+</odoo>
+
+
